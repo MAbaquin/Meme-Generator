@@ -7,10 +7,10 @@ var contentY = 0;
 var contentWidth = 150;
 
 async function generateImage(imageString, width, height) {
-    //const loadedImage = await Canvas.resolveImage(imageString);
+    const loadedImage = await Canvas.resolveImage(imageString);
 
     let image = new Canvas(width, height)
-        //.printImage(loadedImage, 0, 0, width, height)
+        .printImage(loadedImage, 0, 0, width, height)
         .setTextFont(fontFamily)
         .setTextSize(fontSize)
         .printWrappedText(content, contentX, contentY, contentWidth);
