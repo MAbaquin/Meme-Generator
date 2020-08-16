@@ -8,4 +8,4 @@ client.commands = new discord.Collection();
 handler.init(client);
 client.on('message', message => handler.parse(prefix, message));
 
-client.login('NzQ0NTQzNDczNjMzMzI5MTky.XzkwJQ.hLQ2iczy4pr0pWeIIjtSCftua5Q');
+client.login('NzQ0NTQzNDczNjMzMzI5MTky.XzkwJQ.w8-FnRVxRPwtikAaniMSz2ehQUk');
