@@ -1,4 +1,5 @@
-const commands = ['ping'];
+const commands = ['ping', 'whatifgodsaid'];
+var painter = require('./painter.js');
 var fs = require('fs');
 var commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 var client;
@@ -12,7 +13,7 @@ function parse(prefix, message) {
 
 function handleCommand(command, message, args) {
     if (commands.includes(command)) {
-        client.commands.get(command).execute(message, args);
+        client.commands.get(command).execute(painter, message, args);
     }
 }
 
