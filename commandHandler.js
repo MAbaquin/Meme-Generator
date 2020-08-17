@@ -1,4 +1,4 @@
-const commands = ['ping', 'whatifgodsaid'];
+const commands = ['ping', 'whatifgodsaid', 'thatsafact'];
 var painter = require('./painter.js');
 var fs = require('fs');
 var commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
