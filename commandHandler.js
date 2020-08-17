@@ -7,7 +7,6 @@ function parse(prefix, message) {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     args = splitMessage(message);
     command = args[1].toLowerCase();
-    console.log(args);
     handleCommand(command, message, args);
 }
 
