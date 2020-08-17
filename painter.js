@@ -1,15 +1,18 @@
 const Canvas = require('canvas-constructor');
 
-async function generateImage(imageString, width, height, content = 'This is a meme', contentX = 0, contentY = 0, contentWidth = 150, fontFamily = 'Arial', fontSize = 12) {
+async function generateImage(imageString, width, height, contents) {
     const loadedImage = await Canvas.resolveImage(imageString);
 
-    return new Canvas.Canvas(width, height)
-        .printImage(loadedImage, 0, 0, width, height)
-        .setTextAlign('center')
-        .setTextFont(fontFamily)
-        .setTextSize(fontSize)
-        .printWrappedText(content, contentX, contentY, contentWidth)
-        .toBufferAsync();
+    var image = new Canvas.Canvas(width, height).printImage(loadedImage, 0, 0, width, height);
+    for (var index = 0; index < contents.length; index++) {
+        var content = contents[index];
+        image.setTextAlign('center')
+            .setTextFont(content.font)
+            .setTextSize(content.size)
+            .printWrappedText(content.content, content.x, content.y, content.width);
+    }
+
+    return image.toBufferAsync();
 }
 
 module.exports = {
