@@ -1,4 +1,4 @@
-const commands = ['ping', 'thatsafact'];
+const commands = ['ping'];
 var fs = require('fs');
 var commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 var client;
