@@ -2,7 +2,7 @@ var Painter = require("./../painter.js");
 var TextArea = require("./../models/textarea.js");
 
 module.exports = {
-    name: "thatsafact",
+    names: ['thatsafact','taf'],
     description: "[CONTENT] and that's a fact",
     async execute(message, args) {
         var imageString = "https://memestorage1.blob.core.windows.net/meme-template/thatsafact.png";
