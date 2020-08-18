@@ -2,7 +2,7 @@ var Painter = require("./../painter.js");
 var TextArea = require("./../models/textarea.js");
 
 module.exports = {
-    name: "whatifgodsaid",
+    names: ['whatifgodsaid','wigs'],
     description: "What if you wanted to go to heaven but god said [CONTENT]",
     async execute(message, args) {
         var imageString = "https://memestorage1.blob.core.windows.net/meme-template/whatifgodsaid.png";

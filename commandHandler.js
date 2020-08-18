@@ -1,4 +1,5 @@
-const commands = ['help', 'ping', 'whatifgodsaid', 'thatsafact'];
+var commands = [];
+var uniqueCommands = [];
 var fs = require('fs');
 var commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 var client;
@@ -12,8 +13,8 @@ function parse(prefix, message) {
 
 function handleCommand(command, message, args) {
     if (commands.includes(command)) {
-        if (command == 'help') {
-            args = client.commands;
+        if (command == 'help' || command == 'h') {
+            args = uniqueCommands;
         }
         client.commands.get(command).execute(message, args);
     }
@@ -27,7 +28,12 @@ function init(discordClient) {
 function loadCommands() {
     for (var file of commandFiles) {
         var command = require(`./commands/${file}`);
-        client.commands.set(command.name, command);
+        uniqueCommands.push(command);
+        for (var index = 0; index < command.names.length; index++) {
+            var name = command.names[index];
+            commands.push(name);
+            client.commands.set(name, command);
+        }
     }
 }
 
