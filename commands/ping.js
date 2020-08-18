@@ -1,7 +1,9 @@
 module.exports =
 {
     name: 'ping',
-    execute(painter, message, args) {
+    description: "The bot will say 'hi!' if it's awake",
+    execute(message, args) {
         message.channel.send('hi!')
+        message.author.send('hi!')
     }
 }

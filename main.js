@@ -7,7 +7,7 @@ const prefix = '.mmg';
 client.commands = new discord.Collection();
 
 handler.init(client);
-client.on('ready', () => client.user.setActivity('The Dankest of Memes', { type: "WATCHING" }));
+client.on('ready', () => client.user.setActivity('The Dankest of Memes | Wake Word: .mmg', { type: "WATCHING" }));
 client.on('message', message => handler.parse(prefix, message));
 
 client.login(process.env.TOKEN);
