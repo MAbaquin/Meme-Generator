@@ -1,5 +1,5 @@
-var Painter = require("./../painter.js");
-var TextArea = require("./../models/textarea.js");
+var Painter = require("../painter.js");
+var TextArea = require("../models/textarea.js");
 
 module.exports = {
     names: ['thatsafact','taf'],
@@ -7,7 +7,7 @@ module.exports = {
     async execute(message, args) {
         var imageString = "https://memestorage1.blob.core.windows.net/meme-template/thatsafact.png";
         var contents = [new TextArea.TextArea({
-            content: args[2],
+            content: args.join(' '),
             x: 231,
             y: 90,
             width: 155

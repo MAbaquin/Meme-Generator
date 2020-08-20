@@ -1,22 +1,26 @@
+const config = require('./config.js');
+var fileSystem = require('fs');
+
 var commands = [];
 var uniqueCommands = [];
-var fs = require('fs');
-var commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 var client;
 
-function parse(prefix, message) {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-    args = splitMessage(message);
-    command = args[1].toLowerCase();
-    handleCommand(command, message, args);
-}
+function handle(message) {
+    if (!message.content.startsWith(config.command.prefix) || message.author.bot) return;
 
-function handleCommand(command, message, args) {
+    var args = message.content.slice(config.command.prefix.length + 1).split(/ +/);
+    const command = args.shift().toLowerCase();
+    const emptyCommand = (command == null || command.length <= 0);
+
+    if (emptyCommand || ['help', 'h'].includes(command)) {
+        args = uniqueCommands;
+    }
+
     if (commands.includes(command)) {
-        if (command == 'help' || command == 'h') {
-            args = uniqueCommands;
-        }
         client.commands.get(command).execute(message, args);
+    }
+    else {
+        client.commands.get('help').execute(message, args);
     }
 }
 
@@ -26,9 +30,12 @@ function init(discordClient) {
 }
 
 function loadCommands() {
+    const commandFiles = fileSystem.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+
     for (var file of commandFiles) {
         var command = require(`./commands/${file}`);
         uniqueCommands.push(command);
+
         for (var index = 0; index < command.names.length; index++) {
             var name = command.names[index];
             commands.push(name);
@@ -37,19 +44,7 @@ function loadCommands() {
     }
 }
 
-function splitMessage(message) {
-    var args = message.content.match(/[\.]*\w+|"[^"]+"/g);
-    for (var index = 0; index < args.length; index++) {
-        var arg = args[index]
-        if (arg.startsWith('"')) {
-            args[index] = arg.substring(1, arg.length - 1);
-        }
-    }
-    return args;
-}
-
-module.exports =
-{
+module.exports = {
     init: init,
-    parse: parse
+    handle: handle
 }
